@@ -8,8 +8,6 @@ import androidx.lifecycle.ViewModel
 
 class LoginViewModel : ViewModel(){
 
-
-
     private val _email =  MutableLiveData<String>()
     val email : LiveData<String> = _email
 
@@ -19,22 +17,22 @@ class LoginViewModel : ViewModel(){
     private val _loginEnable =  MutableLiveData<Boolean>()
     val loginEnable : LiveData<Boolean> = _loginEnable
 
-   /* private val _loading =  MutableLiveData<Boolean>()
-    val loading : LiveData<Boolean> = _loading*/
-
     fun onLoginChanged(email: String, password: String) {
         _email.value = email
         _password.value = password
-
         //habilitara o desahabilitara el boton sign in
         _loginEnable.value = validarEmail(email) && validarPassword(password)
-
     }
 
     private fun validarPassword(password: String): Boolean = password.length >8
 
     private fun validarEmail(email: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
+
+
+
+    /* private val _loading =  MutableLiveData<Boolean>()
+    val loading : LiveData<Boolean> = _loading*/
 
   /* suspend fun loginButton (){
        _loading.value = true

@@ -1,16 +1,16 @@
 package com.example.mvvm.uii
 
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,14 +30,16 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import com.example.mvvm.R
 
-
-
 @Composable
-fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel){
+fun ResgisterScreen(navController: NavHostController , viewModel: RegisterViewModel){
 
-    val email :String by viewModel.email.observeAsState(initial = "")
-    val password :String by viewModel.password.observeAsState(initial = "")
-    val loginEnable :Boolean by viewModel.loginEnable.observeAsState(initial = false)
+    val offset = Offset(5.0f, 10.0f)
+
+    val emailRg :String by viewModel.emailRg.observeAsState(initial = "")
+    val passwordRg :String by viewModel.passwordRg.observeAsState(initial = "")
+    val phone :String by viewModel.phone.observeAsState(initial = "")
+    val name :String by viewModel.name.observeAsState(initial = "")
+    val registerEnable :Boolean by viewModel.registerEnable.observeAsState(initial = false)
 
 
     Box(
@@ -63,7 +65,7 @@ fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel){
                 Surface(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(400.dp)
+                        .height(420.dp)
                         .constrainAs(surface) {
                             bottom.linkTo(parent.bottom)
                         },
@@ -91,19 +93,20 @@ fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel){
                             )
                         )
 
-                        Spacer(modifier = Modifier.padding(16.dp))
-                        EmailField(email) { viewModel.onLoginChanged(it, password) }
-                        Spacer(modifier = Modifier.padding(16.dp))
-                        PasswordField(password) {viewModel.onLoginChanged(email, it)}
-                        Spacer(modifier = Modifier.padding(8.dp))
-                        SignIn()
-                        Spacer(modifier = Modifier.padding(8.dp))
+                        Spacer(modifier = Modifier.padding(4.dp))
+                        ResgiterFieldName(name) {viewModel.registerFields(it,passwordRg,emailRg,phone)}
+                        Spacer(modifier = Modifier.padding(4.dp))
+                        ResgiterFieldEmail(emailRg){viewModel.registerFields(it,name,passwordRg,phone)}
+                        Spacer(modifier = Modifier.padding(4.dp))
+                        ResgiterFieldPass(passwordRg) {viewModel.registerFields(it,name,emailRg,phone)}
+                        Spacer(modifier = Modifier.padding(4.dp))
+                        ResgiterFieldNumber(phone) {viewModel.registerFields(it,name,emailRg,passwordRg)}
+                        Spacer(modifier = Modifier.padding(4.dp))
+                        SignUp()
 
-                        Text(
-                           text = AnnotatedString("Do not have an Account?"),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { },
+                        ClickableText(
+                            text = AnnotatedString("Already have an account?"),
+                            modifier = Modifier.fillMaxWidth(),
                             style = TextStyle(
                                 fontSize = 20.sp,
                                 textAlign = TextAlign.Center,
@@ -112,9 +115,8 @@ fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel){
                                     color = Color(0xFFF7BCB6),
                                     offset = offset,
                                     blurRadius = 3f)),
+                            onClick = {}
                         )
-                        Spacer(modifier = Modifier.padding(4.dp))
-                        ForgotPassword()
                     }
                 }
                 FloatingActionButton(
@@ -141,56 +143,30 @@ fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel){
 }
 
 @Composable
-fun SignIn() {
-  Button(
-      onClick = { /*TODO*/ },
-      modifier = Modifier
-          .fillMaxWidth()
-          .height(48.dp),
-      colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFAE96DA),
-          disabledBackgroundColor = Color(0xFF635C70),
-          contentColor = Color.White,
-          disabledContentColor = Color.White
-      )
-  ) {
-      Text(text = "Sign In")
-  }
-}
-/*@Composable
-fun GoogleUsers() {
-    Button(
-        onClick = { /*TODO*/ },
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(48.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFAE96DA),
-            disabledBackgroundColor = Color(0xFF635C70),
-            contentColor = Color.White,
-            disabledContentColor = Color.White
+fun ResgiterFieldNumber(phone: String, onTextFieldChanged: (String) -> Unit) {
+    TextField(
+        value = phone,
+        onValueChange = {onTextFieldChanged},
+        modifier = Modifier.fillMaxWidth(),
+        label = { Text(text = "Phone Number")},
+        placeholder = { Text(text = "864 648 514") },
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+        singleLine = true,
+        maxLines = 1,
+        colors = TextFieldDefaults.textFieldColors(textColor = Color.Black,
+            backgroundColor = Color(0xFFeeeeee),
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
         )
-    ) {
-        Text(text = "Sign In With Google")
-    }
-}*/
-
-@Composable
-fun ForgotPassword() {
-    Text(
-        text = "Forgot Password?",
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable { },
-        style = MaterialTheme.typography.body1,
-        fontWeight = FontWeight.Normal,
-        textAlign = TextAlign.Center
     )
 }
 
 @Composable
-fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
+fun ResgiterFieldPass(passwordRg: String, onTextFieldChanged: (String) -> Unit) {
+
     TextField(
-        value = password,
-        onValueChange = {onTextFieldChanged(it)},
+        value = passwordRg,
+        onValueChange = {onTextFieldChanged},
         label = { Text(text = "Password")},
         placeholder = { Text(text = "Ejemplo123") },
         modifier = Modifier.fillMaxWidth(),
@@ -206,15 +182,53 @@ fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
 }
 
 @Composable
-fun EmailField(email: String, onTextFieldChanged: (String) -> Unit) {
+fun ResgiterFieldEmail(emailRg: String, onTextFieldChanged: (String) -> Unit) {
 
     TextField(
-        value = email,
+        value = emailRg,
         onValueChange = {onTextFieldChanged(it)},
         modifier = Modifier.fillMaxWidth(),
         label = { Text(text = "Email")},
         placeholder = { Text(text = "Ejemplo@gmail.com") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+        singleLine = true,
+        maxLines = 1,
+        colors = TextFieldDefaults.textFieldColors(textColor = Color.Black,
+            backgroundColor = Color(0xFFeeeeee),
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
+        )
+    )
+}
+
+@Composable
+fun SignUp() {
+
+    Button(
+        onClick = { /*TODO*/ },
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(48.dp),
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFAE96DA),
+            disabledBackgroundColor = Color(0xFF635C70),
+            contentColor = Color.White,
+            disabledContentColor = Color.White
+        )
+    ) {
+        Text(text = "Sign Up")
+    }
+}
+
+@Composable
+fun ResgiterFieldName(name: String, onTextFieldChanged: (String) -> Unit) {
+
+    TextField(
+        value = name,
+        onValueChange = {onTextFieldChanged},
+        modifier = Modifier.fillMaxWidth(),
+        placeholder = { Text(text = "Pepito Perez") },
+        label = { Text(text = "Full Name")},
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
         singleLine = true,
         maxLines = 1,
         colors = TextFieldDefaults.textFieldColors(textColor = Color.Black,

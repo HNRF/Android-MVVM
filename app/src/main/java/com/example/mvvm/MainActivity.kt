@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
+import com.example.mvvm.Navigation.AppNavigation
 import com.example.mvvm.ui.theme.MVVMTheme
 import com.example.mvvm.uii.LoginScreen
 import com.example.mvvm.uii.LoginViewModel
@@ -21,7 +22,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    LoginScreen(LoginViewModel())
+
+                    AppNavigation()
+
                 }
             }
         }
