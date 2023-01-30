@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import com.example.mvvm.R
+import com.example.mvvm.navigation.AppScreen
 
 @Composable
 fun ResgisterScreen(navController: NavHostController , viewModel: RegisterViewModel){
@@ -115,7 +116,7 @@ fun ResgisterScreen(navController: NavHostController , viewModel: RegisterViewMo
                                     color = Color(0xFFF7BCB6),
                                     offset = offset,
                                     blurRadius = 3f)),
-                            onClick = {}
+                            onClick = {navController.navigate(AppScreen.Login.route)}
                         )
                     }
                 }

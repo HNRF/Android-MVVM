@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -28,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
+import com.example.mvvm.navigation.AppScreen
 import com.example.mvvm.R
 
 
@@ -99,11 +101,10 @@ fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel){
                         SignIn()
                         Spacer(modifier = Modifier.padding(8.dp))
 
-                        Text(
+                        ClickableText(
                            text = AnnotatedString("Do not have an Account?"),
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { },
+                                .fillMaxWidth(),
                             style = TextStyle(
                                 fontSize = 20.sp,
                                 textAlign = TextAlign.Center,
@@ -112,6 +113,9 @@ fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel){
                                     color = Color(0xFFF7BCB6),
                                     offset = offset,
                                     blurRadius = 3f)),
+                            onClick = {
+                                navController.navigate(AppScreen.Register.route)
+                            }
                         )
                         Spacer(modifier = Modifier.padding(4.dp))
                         ForgotPassword()

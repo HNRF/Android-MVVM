@@ -1,7 +1,4 @@
-package com.example.mvvm.Navigation
-
-
-
+package com.example.mvvm.navigation
 
 sealed class AppScreen (val route:String){
 

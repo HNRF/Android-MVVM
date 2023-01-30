@@ -1,4 +1,4 @@
-package com.example.mvvm.Navigation
+package com.example.mvvm.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
