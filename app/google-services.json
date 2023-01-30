@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "632386635563",
+    "project_id": "crud-c1b58",
+    "storage_bucket": "crud-c1b58.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:632386635563:android:f9b4c9b4deec675c65e76e",
+        "android_client_info": {
+          "package_name": "com.example.mvvm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "632386635563-isia8fu85uh496occivtot0upc484lmi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnxjRGFvVaAlFeX6t1UZBxVxpdHYv7GKk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "632386635563-isia8fu85uh496occivtot0upc484lmi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:632386635563:android:832058ae8499a6b165e76e",
+        "android_client_info": {
+          "package_name": "com.example.practicae"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "632386635563-isia8fu85uh496occivtot0upc484lmi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnxjRGFvVaAlFeX6t1UZBxVxpdHYv7GKk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "632386635563-isia8fu85uh496occivtot0upc484lmi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

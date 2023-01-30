@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -72,6 +73,9 @@ dependencies {
     //INCLUIR NAVIGATION PARA PODER USAR NAVCONTROLER Y NAVEGABILIDAD ENTRE PANTALLAS
     implementation "androidx.navigation:navigation-compose:2.5.3"
 
+    //INCLUIR FIREBASE PARA PODER USAR CLOUD FIRESTORE
+    implementation platform('com.google.firebase:firebase-bom:31.2.0')
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.2'
 
 
 

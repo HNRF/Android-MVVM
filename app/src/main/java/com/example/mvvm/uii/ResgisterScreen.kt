@@ -53,6 +53,7 @@ fun ResgisterScreen(navController: NavHostController , viewModel: RegisterViewMo
             contentDescription = "Login Image",
             contentScale = ContentScale.Inside
         )
+
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.BottomCenter

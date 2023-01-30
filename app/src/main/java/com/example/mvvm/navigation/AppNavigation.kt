@@ -15,6 +15,7 @@ fun AppNavigation(){
     {
        composable(AppScreen.Login.route){ LoginScreen(navigationController, LoginViewModel()) }
         composable(AppScreen.Register.route){ ResgisterScreen(navigationController, RegisterViewModel()) }
+        composable(AppScreen.Register.route){ HomeScreen(navigationController) }
     }
 
 

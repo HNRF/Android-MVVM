@@ -98,7 +98,7 @@ fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel){
                         Spacer(modifier = Modifier.padding(16.dp))
                         PasswordField(password) {viewModel.onLoginChanged(email, it)}
                         Spacer(modifier = Modifier.padding(8.dp))
-                        SignIn()
+                       // SignIn(navController)
                         Spacer(modifier = Modifier.padding(8.dp))
 
                         ClickableText(
@@ -129,7 +129,7 @@ fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel){
                             end.linkTo(surface.end, margin = 36.dp)
                         },
                     backgroundColor = Color(0xFFDC493A),
-                    onClick = {}
+                    onClick = {navController.navigate(AppScreen.Home.route)}
                 ) {
                     Icon(
                         imageVector = Icons.Default.ArrowForward,
@@ -144,10 +144,10 @@ fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel){
     }
 }
 
-@Composable
-fun SignIn() {
+/*@Composable
+fun SignIn(navController: NavHostController) {
   Button(
-      onClick = { /*TODO*/ },
+      onClick = { navController.navigate(AppScreen.Home.route) },
       modifier = Modifier
           .fillMaxWidth()
           .height(48.dp),
@@ -159,7 +159,7 @@ fun SignIn() {
   ) {
       Text(text = "Sign In")
   }
-}
+}*/
 /*@Composable
 fun GoogleUsers() {
     Button(
