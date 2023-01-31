@@ -31,15 +31,15 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import com.example.mvvm.navigation.AppScreen
 import com.example.mvvm.R
-
+import com.example.mvvm.uii.viewmodel.LoginViewModel
 
 
 @Composable
-fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel){
+fun LoginScreen(navController: NavHostController, LoginViewModel: LoginViewModel){
 
-    val email :String by viewModel.email.observeAsState(initial = "")
-    val password :String by viewModel.password.observeAsState(initial = "")
-    val loginEnable :Boolean by viewModel.loginEnable.observeAsState(initial = false)
+    val email :String by LoginViewModel.email.observeAsState(initial = "")
+    val password :String by LoginViewModel.password.observeAsState(initial = "")
+
 
 
     Box(
@@ -94,11 +94,53 @@ fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel){
                         )
 
                         Spacer(modifier = Modifier.padding(16.dp))
-                        EmailField(email) { viewModel.onLoginChanged(it, password) }
+
+                        TextField(
+                            value = email,
+                            onValueChange = {LoginViewModel.onLoginChanged(it,password)},
+                            modifier = Modifier.fillMaxWidth(),
+                            label = { Text(text = "Email")},
+                            placeholder = { Text(text = "Ejemplo@gmail.com") },
+                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                            singleLine = true,
+                            maxLines = 1,
+                            colors = TextFieldDefaults.textFieldColors(textColor = Color.Black,
+                                backgroundColor = Color(0xFFeeeeee),
+                                focusedIndicatorColor = Color.Transparent,
+                                unfocusedIndicatorColor = Color.Transparent
+                            )
+                        )
                         Spacer(modifier = Modifier.padding(16.dp))
-                        PasswordField(password) {viewModel.onLoginChanged(email, it)}
+
+                        TextField(
+                            value = password,
+                            onValueChange = {LoginViewModel.onLoginChanged(email,it)},
+                            label = { Text(text = "Password")},
+                            placeholder = { Text(text = "Ejemplo123") },
+                            modifier = Modifier.fillMaxWidth(),
+                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                            singleLine = true,
+                            maxLines = 1,
+                            colors = TextFieldDefaults.textFieldColors(textColor = Color.Black,
+                                backgroundColor = Color(0xFFeeeeee),
+                                focusedIndicatorColor = Color.Transparent,
+                                unfocusedIndicatorColor = Color.Transparent,
+                            )
+                        )
+
                         Spacer(modifier = Modifier.padding(8.dp))
-                       // SignIn(navController)
+
+                        Button(
+                            onClick = { navController.navigate("HomeScreen") },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(48.dp),
+                            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFAE96DA),
+                                contentColor = Color.White,
+                            )
+                        ) {
+                            Text(text = "Sign In")
+                        }
                         Spacer(modifier = Modifier.padding(8.dp))
 
                         ClickableText(
@@ -144,39 +186,6 @@ fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel){
     }
 }
 
-/*@Composable
-fun SignIn(navController: NavHostController) {
-  Button(
-      onClick = { navController.navigate(AppScreen.Home.route) },
-      modifier = Modifier
-          .fillMaxWidth()
-          .height(48.dp),
-      colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFAE96DA),
-          disabledBackgroundColor = Color(0xFF635C70),
-          contentColor = Color.White,
-          disabledContentColor = Color.White
-      )
-  ) {
-      Text(text = "Sign In")
-  }
-}*/
-/*@Composable
-fun GoogleUsers() {
-    Button(
-        onClick = { /*TODO*/ },
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(48.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFAE96DA),
-            disabledBackgroundColor = Color(0xFF635C70),
-            contentColor = Color.White,
-            disabledContentColor = Color.White
-        )
-    ) {
-        Text(text = "Sign In With Google")
-    }
-}*/
-
 @Composable
 fun ForgotPassword() {
     Text(
@@ -187,44 +196,5 @@ fun ForgotPassword() {
         style = MaterialTheme.typography.body1,
         fontWeight = FontWeight.Normal,
         textAlign = TextAlign.Center
-    )
-}
-
-@Composable
-fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
-    TextField(
-        value = password,
-        onValueChange = {onTextFieldChanged(it)},
-        label = { Text(text = "Password")},
-        placeholder = { Text(text = "Ejemplo123") },
-        modifier = Modifier.fillMaxWidth(),
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-        singleLine = true,
-        maxLines = 1,
-        colors = TextFieldDefaults.textFieldColors(textColor = Color.Black,
-            backgroundColor = Color(0xFFeeeeee),
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-        )
-    )
-}
-
-@Composable
-fun EmailField(email: String, onTextFieldChanged: (String) -> Unit) {
-
-    TextField(
-        value = email,
-        onValueChange = {onTextFieldChanged(it)},
-        modifier = Modifier.fillMaxWidth(),
-        label = { Text(text = "Email")},
-        placeholder = { Text(text = "Ejemplo@gmail.com") },
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-        singleLine = true,
-        maxLines = 1,
-        colors = TextFieldDefaults.textFieldColors(textColor = Color.Black,
-            backgroundColor = Color(0xFFeeeeee),
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
-        )
     )
 }

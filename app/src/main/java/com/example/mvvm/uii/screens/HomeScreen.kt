@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
+import com.example.mvvm.navigation.AppScreen
 
 
 @Composable
@@ -81,7 +82,17 @@ fun HomeScreen(navController: NavHostController){
                             )
                         )
                         Spacer(modifier = Modifier.padding(16.dp))
-                        Create()
+                        Button(
+                            onClick = { navController.navigate(AppScreen.Create.route) },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(48.dp),
+                            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFAE96DA)
+                            )
+                        ) {
+                            Text(text = "Create")
+                        }
+
                         Spacer(modifier = Modifier.padding(8.dp))
                         Delete()
                         Spacer(modifier = Modifier.padding(8.dp))
@@ -140,19 +151,7 @@ fun Delete() {
     }
 }
 
-@Composable
-fun Create() {
-    Button(
-        onClick = { /*TODO*/ },
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(48.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFAE96DA)
-        )
-    ) {
-        Text(text = "Create")
-    }
-}
+
 
 @Composable
 fun AndroidLogo(

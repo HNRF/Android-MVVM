@@ -30,6 +30,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import com.example.mvvm.R
 import com.example.mvvm.navigation.AppScreen
+import com.example.mvvm.uii.viewmodel.RegisterViewModel
 
 @Composable
 fun ResgisterScreen(navController: NavHostController , viewModel: RegisterViewModel){

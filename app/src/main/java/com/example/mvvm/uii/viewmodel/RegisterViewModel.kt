@@ -1,4 +1,4 @@
-package com.example.mvvm.uii
+package com.example.mvvm.uii.viewmodel
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData
